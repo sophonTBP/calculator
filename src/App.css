@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +26,82 @@
 
 .App-link {
   color: #61dafb;
+}
+.nums,.ops,.dec,.clr{
+  border: 3px ridge black; ;
+}  
+#keyboard{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "ac ac ac mult"
+    "seven eight nine div"
+    "four five six sub"
+    "one two three add"
+    "zero dec equ equ ";
+ gap: 1rem;
+}
+
+#zero{
+  grid-area:zero;
+ }
+
+#one{
+  grid-area:one;
+ }
+ #two{
+  grid-area:two;
+}
+
+#three{
+  grid-area:three;
+ }
+#four{
+  grid-area: four;
+}
+#five{
+  grid-area: five;
+}
+#six{
+  grid-area: six;
+}
+#seven{
+  grid-area: seven;
+}
+
+#eight {
+  grid-area: eight;
+}
+
+#nine {
+  grid-area: nine;
+}
+
+#add {
+  grid-area:add;
+}
+
+#substract{
+  grid-area:sub;
+}
+
+#multiply{
+  grid-area:mult;
+}
+#divide{
+  grid-area:div;
+}
+
+#decimal{
+  grid-area:dec;
+}
+
+#clear{
+  grid-area:ac;
+}
+#equal{
+  grid-area:equ;
 }
 
 @keyframes App-logo-spin {
