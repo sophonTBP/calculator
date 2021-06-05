@@ -1,38 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
 import ReactFCCtest from 'react-fcctest';
-import React from 'react';
+import React, { useReducer } from 'react';
 
-  function add (state,str){
-    let currVal=state
-    currVal+=str
+  function add (a,b){
+    let currVal=a
+    currVal+=b
     return currVal
   }
   
-  function sub (state,str){
-    let currVal=state
-    currVal-=str
+  function sub (a,b){
+    let currVal=a
+    currVal-=b
     return currVal
   }
 
-  function mult (state,str){
-    let currVal=state
-    currVal*=str
+  function mult (a,b){
+    let currVal=a
+    currVal*=b
     return currVal
   }
 
-  function div (state,str){
-    let currVal=state
-    currVal/=str
+  function div (a,b){
+    let currVal=a
+    currVal/=b
     return currVal
   }
 
 
 
 
-  function inputBegining (str) {
+  function input (str) {
     
-  let re = /(^[+*/-]+(?=-\.+\d)|^[+*/]+(?=\.\d))|([+*/-]+(?=[*+/])|[-*+/]+(?=-{2,}))/g
+  let re = /(^0+(?=0{1}.\d*)|^[0+*/-]+(?=-\d)|^[+*/0]+(?=\d))|([+*/-]+(?=[*+/])|[-+/]+(?=-{2,}\d+)|[+/]+(?=[*])|(?<=\d+\.+\d*)\.+)(?![*-+/])/g
       let val = str.replace(re,"")
       return val
     }
@@ -43,7 +43,7 @@ import React from 'react';
     constructor(props) {
       super(props);
       this.state = {
-        input: "",
+        input: "0",
         submit: "",
         result:""
       };
@@ -76,7 +76,7 @@ import React from 'react';
 
     handleChange(event) {
       let val = event.target.value
-      val = inputBegining(val)
+      val = input(val)
       this.setState({
         input: val,
        
@@ -96,6 +96,7 @@ import React from 'react';
 
 
     handleZero(){
+      
       this.setState(state=>({
         input: state.input+=0
       })); 
@@ -166,7 +167,7 @@ import React from 'react';
 
     handleAdd(){
       let val = this.state.input      
-      val = inputBegining(val)
+      val = input(val)
       this.setState(state=>({
       input: state.input+="+",
       result: val  
@@ -180,7 +181,7 @@ import React from 'react';
       let val = this.state.result     
       val = this.state.input
       console.log(val)
-      val = inputBegining(val)      
+      val = input(val)      
       this.setState(state=>({
       input: state.input+="-",
       result: val
@@ -191,7 +192,7 @@ import React from 'react';
       let val = this.state.result     
       val = this.state.input
       console.log(val)
-      val = inputBegining(val)      
+      val = input(val)      
       this.setState(state=>({
       input: state.input+="*",
       result: val 
@@ -202,7 +203,7 @@ import React from 'react';
       let val = this.state.result     
       val = this.state.input
       console.log(val)
-      val = inputBegining(val)      
+      val = input(val)      
       this.setState(state=>({
       input: state.input+="/",
       result: val })); 
@@ -212,10 +213,10 @@ import React from 'react';
       let val = this.state.input
       
       console.log(val)
-      val = inputBegining(val)
+      val = input(val)
       if(val.startsWith(".")){
         let decVal="0."
-        val= val.replace(".",decVal)
+        val+= val.replace(".",decVal)
       }      
       this.setState(state=>({
       input: state.input+=".",
@@ -225,7 +226,7 @@ import React from 'react';
     
     handleClear(){
       this.setState(state=>({
-        input: "",
+        input: "0",
         submit:"",
       result: ""
       })); 
@@ -233,10 +234,10 @@ import React from 'react';
     handleEqual(){
       let val = this.state.result      
       val = this.state.input
-      val = inputBegining(val)
-      console.log(val)
+      val = input(val)
+      console.log("val:"+val)
       let arr=[]
-      let firstSymbolArr=val.match(/^-.*|\./)
+      let firstSymbolArr=val.match(/^-.*/)
     if(firstSymbolArr){
     console.log(firstSymbolArr)
     arr=val.match(/[-+*/]+\d+/g)
@@ -244,11 +245,16 @@ import React from 'react';
     
     else{
       console.log(firstSymbolArr)
-    arr=val.match(/^\d+|[-+*/]+\d+/g)}
+    arr=val.match(/^\d[-+*/]+\d+/g)}
     
 console.log(arr)
+let numbers=[]
 
 
+
+
+
+console.log()
 
 
       this.setState(state=>({
@@ -259,7 +265,7 @@ console.log(arr)
 
 
   render() {
-  let currentVal= this.state.input 
+  let currentVal= input(this.state.input) 
   
 
 
@@ -279,7 +285,7 @@ console.log(arr)
           </form>
           {/* Change code below this line */}
           
-         {currentVal}<br/>
+         {currentVal }<br/>
          {this.state.result}
           {/* Change code above this line */}
         </div>
