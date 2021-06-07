@@ -3,38 +3,16 @@ import './App.css';
 import ReactFCCtest from 'react-fcctest';
 import React, { useReducer } from 'react';
 
-  function add (a,b){
-    let currVal=a
-    currVal+=b
-    return currVal
-  }
+ 
+
+
+
+
+  function cleanInput (str) {
   
-  function sub (a,b){
-    let currVal=a
-    currVal-=b
-    return currVal
-  }
-
-  function mult (a,b){
-    let currVal=a
-    currVal*=b
-    return currVal
-  }
-
-  function div (a,b){
-    let currVal=a
-    currVal/=b
-    return currVal
-  }
-
-
-
-
-  function input (str) {
-    
-  let re = /(^0+(?=0{1}.\d*)|^[0+*/-]+(?=-\d)|^[+*/0]+(?=\d))|([+*/-]+(?=[*+/])|[-+/]+(?=-{2,}\d+)|[+/]+(?=[*])|(?<=\d+\.+\d*)\.+)(?![*-+/])/g
-      let val = str.replace(re,"")
-      return val
+    let re = /-?(0|[1-9]\d*)(\.\d+)?/g
+    let cleanImput = str.match(re)
+    return cleanImput.join("").toString()
     }
 
 
@@ -45,7 +23,9 @@ import React, { useReducer } from 'react';
       this.state = {
         input: "0",
         submit: "",
-        result:""
+        result:"",
+        showResult:false,
+        start:true
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -76,7 +56,7 @@ import React, { useReducer } from 'react';
 
     handleChange(event) {
       let val = event.target.value
-      val = input(val)
+      val = cleanInput(val)
       this.setState({
         input: val,
        
@@ -96,81 +76,229 @@ import React, { useReducer } from 'react';
 
 
     handleZero(){
+      let val=(this.state.input)
+      if(val.match(/^0\./)){
+        this.setState(state=>({
+          input: state.input+=0,
+          showResult:false
+        }))
+
+      }
       
+      if(val.startsWith("0")){
+        this.setState(state=>({
+          input: state.input.replace("0","0"),
+          showResult:false
+        })); 
+
+      }else
       this.setState(state=>({
-        input: state.input+=0
+        input: state.input+=0,
+        showResult:false
       })); 
     }
 
 
     handleOne(){
+let value= this.state.input
+      if(this.state.start===true){
+        value="1"
+        this.setState(state=>({ 
+          input:"1",
+          start:false
+        }));
+      }else
       
       this.setState(state=>({
-
-        input: state.input+=1,
+        value: this.state.input,
+        input: value+1,
+        showResult:false,
         
       })); 
     }
 
     handleTwo(){
+      let value= this.state.input
+      if(this.state.start===true){
+        value="2"
+        this.setState(state=>({ 
+          input:"2",
+          start:false
+        }));
+      }else
+      
       
       this.setState(state=>({
-
-        input: state.input+=2,
-        
-      }));
-    }
-
-    handleThree(){
-      this.setState(state=>({
-        input: state.input+=3
+        value: this.state.input,
+        input: value+="2",
+        showResult:false
       })); 
+    }
+    handleThree(){
+      let value= this.state.input
+      if(this.state.start===true){
+        value="3"
+        this.setState(state=>({ 
+          input:"3",
+          start:false
+        }));
+      }else
+      
+      
+      this.setState(state=>({
+        value: this.state.input,
+        input: value+3,
+        showResult:false
+      }));  
     }
 
     handleFour(){
+      let value= this.state.input
+      if(this.state.start===true){
+        value="4"
+        this.setState(state=>({ 
+          input:"4",
+          start:false
+        }));
+      }else
+      
+      
       this.setState(state=>({
-        input: state.input+=4
+        value: this.state.input,
+        input: value+4,
+        showResult:false
       })); 
     }
 
     handleFive(){
+
+      let value= this.state.input
+      if(this.state.start===true){
+        value="5"
+        this.setState(state=>({ 
+          input:"5",
+          start:false
+        }));
+      }else
+      
+      
       this.setState(state=>({
-        input: state.input+=5
+        value: this.state.input,
+        input: value+5,
+        showResult:false
       })); 
     }
 
 
     handleSix(){
+
+      let value= this.state.input
+      if(this.state.start===true){
+        value="6"
+        this.setState(state=>({ 
+          input:"6",
+          start:false
+        }));
+      }else
+      
+      
       this.setState(state=>({
-        input: state.input+=6
+        value: this.state.input,
+        input: value+6,
+        showResult:false
       })); 
     }
 
     handleSeven(){
+      let value= this.state.input
+      if(this.state.start===true){
+        value="7"
+        this.setState(state=>({ 
+          input:"7",
+          start:false
+        }));
+      }else
+      
+      
       this.setState(state=>({
-        input: state.input+=7
+        value: this.state.input,
+        input: value+7,
+        showResult:false
       })); 
     }
 
     handleEight(){
+      let value= this.state.input
+      if(this.state.start===true){
+        value="8"
+        this.setState(state=>({ 
+          input:"8",
+          start:false
+        }));
+      }else
+      
+      
       this.setState(state=>({
-        input: state.input+=8
+        value: this.state.input,
+        input: value+8,
+        showResult:false
       })); 
     }
 
 
     handleNine(){
+
+      let value= this.state.input
+      if(this.state.start===true){
+        value="9"
+        this.setState(state=>({ 
+          input:"9",
+          start:false
+        }));
+      }else
+      
+      
       this.setState(state=>({
-        input: state.input+=9
+        value: this.state.input,
+        input: value+9,
+        showResult:false
       })); 
     }
 
     handleAdd(){
-      let val = this.state.input      
-      val = input(val)
+      let val = this.state.input  
+      if(val.endsWith("*-"))
+      this.setState(state=>({
+        input: state.input.replace("*-","+"),
+        result: val
+        }));else
+        if(val.endsWith("/-"))
+      this.setState(state=>({
+        input: state.input.replace("/-","-"),
+        result: val
+        }));else
+
+      if(val.endsWith("-"))
+      this.setState(state=>({
+        input: state.input.replace("-","+"),
+        result: val
+        }));else
+        if(val.endsWith("*"))
+      this.setState(state=>({
+        input: state.input.replace("*","+"),
+        result: val
+        }));else
+        if(val.endsWith("/"))
+      this.setState(state=>({
+        input: state.input.replace("/","+"),
+        result: val
+        }));else
+      
+
+      if(!val.endsWith("+"))
       this.setState(state=>({
       input: state.input+="+",
-      result: val  
+      result: cleanInput(val)  
       }));
 
      
@@ -178,10 +306,25 @@ import React, { useReducer } from 'react';
     }
 
     handleSub(){
-      let val = this.state.result     
-      val = this.state.input
+      let val = this.state.input
       console.log(val)
-      val = input(val)      
+
+      if(val.endsWith("*-"))
+      this.setState(state=>({
+        input: state.input.replace("-","-"),
+        result: val
+        }));else
+
+
+      
+      if(val.endsWith("+"))
+      this.setState(state=>({
+        input: state.input.replace("+","-"),
+        result: val
+        }));else
+        
+
+      if(!val.endsWith("--"))      
       this.setState(state=>({
       input: state.input+="-",
       result: val
@@ -189,10 +332,28 @@ import React, { useReducer } from 'react';
     }
 
     handleMult(){
-      let val = this.state.result     
-      val = this.state.input
+      let val = this.state.input
       console.log(val)
-      val = input(val)      
+      if(val.endsWith("-"))
+      this.setState(state=>({
+        input: state.input.replace("-","*"),
+        result: val
+        }))
+       else 
+       if(val.endsWith("+"))
+      this.setState(state=>({
+        input: state.input.replace("+","*"),
+        result: val
+        }))
+       else 
+
+
+      if(val.endsWith("*"))
+      this.setState(state=>({
+        input: state.input.replace("*","*"),
+        result: val
+        }))
+       else  
       this.setState(state=>({
       input: state.input+="*",
       result: val 
@@ -200,73 +361,248 @@ import React, { useReducer } from 'react';
     }
 
     handleDiv(){
-      let val = this.state.result     
-      val = this.state.input
+      let val = this.state.input
       console.log(val)
-      val = input(val)      
+      if(val.endsWith("-"))
+      this.setState(state=>({
+        input: state.input.replace("-","/"),
+        result: val
+        }))
+       else 
+       if(val.endsWith("+"))
+      this.setState(state=>({
+        input: state.input.replace("+","/"),
+        result: val
+        }))
+       else 
+
+
+      if(val.endsWith("/"))
+      this.setState(state=>({
+        input: state.input.replace("/","/"),
+        result: val
+        }))
+       else  
       this.setState(state=>({
       input: state.input+="/",
-      result: val })); 
+      result: val 
+    }));  
+    
+
     }
    
     handleDec(){
       let val = this.state.input
       
+      
       console.log(val)
-      val = input(val)
+      
+
       if(val.startsWith(".")){
         let decVal="0."
-        val+= val.replace(".",decVal)
-      }      
+        val= val.replace(".",decVal)
+        this.setState(state=>({
+          input: state.input,
+          start:false,
+          result: val })); 
+
+      }else      
+      if((!val.includes(".")))
       this.setState(state=>({
       input: state.input+=".",
-      result: val })); 
+      result: val, 
+      start:false,})); 
+       else 
+       if((val.includes("."))&(val.lastIndexOf("*"))>(val.lastIndexOf(".")))
+          {
+        this.setState(state=>({
+          input: state.input+=".",
+          result: val, 
+          start:false,}));
+
+       }
+       else 
+       if((val.includes("."))&(val.lastIndexOf("/"))>(val.lastIndexOf(".")))
+          {
+        this.setState(state=>({
+          input: state.input+=".",
+          result: val, 
+          start:false,}));
+
+       }
+       else 
+       if((val.includes("."))&(val.lastIndexOf("+"))>(val.lastIndexOf(".")))
+          {
+        this.setState(state=>({
+          input: state.input+=".",
+          result: val, 
+          start:false,}));
+
+       }
+       else 
+       if((val.includes("."))&(val.lastIndexOf("-"))>(val.lastIndexOf(".")))
+          {
+        this.setState(state=>({
+          input: state.input+=".",
+          result: val, 
+          start:false,}));
+
+       }
+
+
+
     }
+
+    
 
     
     handleClear(){
       this.setState(state=>({
         input: "0",
         submit:"",
-      result: ""
+      result: "0",
+      showResult:false,
+      start:true
       })); 
     }
     handleEqual(){
-      let val = this.state.result      
-      val = this.state.input
-      val = input(val)
-      console.log("val:"+val)
-      let arr=[]
-      let firstSymbolArr=val.match(/^-.*/)
-    if(firstSymbolArr){
-    console.log(firstSymbolArr)
-    arr=val.match(/[-+*/]+\d+/g)
-    }
+      let value = this.state.input
+      
+      
+
+   
+      let re = /([+*/-]+(?=[*+/])|[-*+/]+(?=-{2,}))/g
     
-    else{
-      console.log(firstSymbolArr)
-    arr=val.match(/^\d[-+*/]+\d+/g)}
-    
+  let arr=value.match(/^\d+\.*\d*|[-+*/]+\d+\.*\d*/g)
+
+
 console.log(arr)
 let numbers=[]
+arr.forEach((number)=>{numbers.push(number.match(/\d+/))})
 
 
 
 
 
-console.log()
 
+
+  let regexOps=/[-*+/]+/g
+  let regexNums=/-?(0|[1-9]\d*)(\.\d+)?/g
+  
+
+const reducer = (acc, curr) =>  {
+  let block=Array.from(curr) 
+  if(!regexOps.test(block[0])){
+    
+  
+    block=parseFloat(block.join(""))
+    console.log(block)
+  } 
+  if(block[1]==="-"&&block[0]==="-")
+  {console.log("--block: "+block.join("").replace("--","+"))
+  block=parseFloat(block.join("").replace("--","+"))
+  }
+
+if((!regexOps.test(block[1]))&&(block[0]==="-")){
+    
+  
+    block=parseFloat(block.join(""))
+    console.log(block)
+  }
+
+
+
+
+  
+if((!regexOps.test(block[1]))&&(block[0]==="+")){
+  let val1=0
+  val1=block.join("").match(regexNums)
+  console.log("+ block"+val1)
+  console.log(parseFloat(val1))
+  block=parseFloat(block.join("").match(regexNums))
+  
+}
+
+if((!regexOps.test(block[1]))&&block[0]==="*"){
+  console.log(block.join("").match(regexNums))
+  block=["*",parseFloat(block.join("").match(regexNums))]
+  
+}
+ console.log("* block"+block)
+if((!regexOps.test(block[1]))&&block[0]==="/")
+  
+    {block=["/",parseFloat(block.join("").match(regexNums))]}
+console.log("/ block"+block)
+
+if((block[1]==="-")&&(block[0]==="*"))
+  
+  {
+  let val=parseFloat(block.join("").match(regexNums))
+  val=-val
+  block=["*",val]}
+
+
+
+
+if(block[1]==="-"&&block[0]==="/")
+  
+  {block=["/",parseFloat(block.toString().match(regexNums).join(""))*-1]}
+  console.log("-/block"+block)
+  
+
+ acc.push(block);
+
+return acc;}
+console.log("arr before reduce"+arr)
+
+let newArr2=arr.reduce(reducer, [])
+console.log("before reduce"+newArr2) 
+
+ for(let i=0;i<newArr2.length;i++)
+   
+  if (Array.isArray(newArr2[i])){
+    if(newArr2[i][0]==="*"){
+      newArr2[i-1]=(newArr2[i-1]*newArr2[i][1])
+      
+    }
+    if(newArr2[i][0]==="/"){
+      newArr2[i-1]=(newArr2[i-1]/newArr2[i][1])
+  }}
+  console.log("after reduce"+newArr2) 
+  
+ 
+ let reduceAdd= (acc, curr) => 
+ {if (!Array.isArray(curr))
+ 
+ {acc += curr}
+return acc}
+value= newArr2.reduce(reduceAdd,0)
+console.log(value)
+
+ 
+ 
 
       this.setState(state=>({
-        submit: this.state.input,
-         result: val
+        
+         result: value,
+         input:value.toString(),
+         showResult:true,
+         start:false
+
       })); 
     }
 
 
   render() {
-  let currentVal= input(this.state.input) 
+  let currentVal= this.state.input
+  console.log(currentVal)
+  let showResult =this.state.showResult
+  let display;
+
   
+
+    if (showResult){display = <div id="display">{this.state.result}</div>}
+    else{display = <div id="display">{currentVal}</div>}
 
 
   return (
@@ -284,12 +620,17 @@ console.log()
             <button type='submit'>Submit!</button>
           </form>
           {/* Change code below this line */}
-          
-         {currentVal }<br/>
-         {this.state.result}
+          {this.state.result}
+         <br/>
+         {currentVal }
           {/* Change code above this line */}
         </div>
       </header>
+      
+       {display}
+
+
+
       <div id="keyboard">
         <div className="nums" id="zero" onClick={this.handleZero}>0</div>
         <div className="nums" id="one" onClick={this.handleOne}>1</div>
@@ -302,14 +643,16 @@ console.log()
         <div className="nums" id="eight" onClick={this.handleEight}>8</div>
         <div className="nums" id="nine" onClick={this.handleNine}>9</div>
         <div className="ops" id="add" onClick={this.handleAdd}>+</div>
-        <div className="ops" id="substract" onClick={this.handleSub}>-</div>
+        <div className="ops" id="subtract" onClick={this.handleSub}>-</div>
         <div className="ops" id="multiply" onClick={this.handleMult}>X</div>
         <div className="ops" id="divide" onClick={this.handleDiv}>/</div>
         <div className="dec" id="decimal" onClick={this.handleDec}>.</div>
         <div className="clr" id="clear" onClick={this.handleClear}>AC</div>
-        <div className="ops" id="equal" onClick={this.handleEqual}>=</div>
+        <div className="ops" id="equals" onClick={this.handleEqual}>=</div>
       </div>
+      <ReactFCCtest />  
     </div>
+    
   );
 }
 }
